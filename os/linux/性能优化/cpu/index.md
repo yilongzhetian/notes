@@ -10,5 +10,17 @@
  后三个数字指的是系统1分钟，5分钟，15分钟的平均负载  
  合理的平均负载数与cpu个数有关，当平均负载为1时，cpu个数为1时，则cpu满负荷运行，当cpu个数为2是，则只占用了50%的cpu，依次次类推，当且仅当平均负载数大于cpu个数时，则认为cpu超负荷运行  
  ~~~
- grep 'model name' /proc/cpuinfo|wc -l  查看cpu个数
+ #查看cpu个数
+ grep 'model name' /proc/cpuinfo|wc -l  
+ ~~~
+ ### cpu使用率
+  单位时间内cpu繁忙程度，不包含等待cpu，cpu使用率不一定等于平均负载数，在cpu密集型作业中，基本相同，在io密集型作业中，cpu使用率可能户小于平均负载数
+ ### 工具验证
+ ~~~
+ #需安装好stress(性能测试) 和sysstat(系统状态包含mpstat和pidstat两个工具) 工具  
+ #所有cpu运行状态
+ mpstat -P -ALL 5
+ #进程占用cpu状态
+ pidstat -u 5
+ 
  ~~~
